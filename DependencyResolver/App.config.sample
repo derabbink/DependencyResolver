@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <appSettings>
+    <!-- path to look for assemblies (relative to ApplicationBasePath). Separate directories with ; -->
+    <add key="AssemblyLoader.assembly-path" value="..\..\..\SomeOtherAssembly\bin\Debug"/>
+  </appSettings>
+</configuration>
