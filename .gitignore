@@ -128,7 +128,7 @@ App_Data/*.ldf
 
 # NuGet
 packages/
-.nupkg
+*.nupkg
 
 # =========================
 # Windows detritus
