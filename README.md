@@ -18,6 +18,12 @@ Don't forget to edit your config file like [so][3].
 Get the compiled library [here][4].
 
 
+## Version
+
+The current stable/published version is v1.0.0.0.<br/>
+The current development version is now v1.0.0.1.
+
+
   [1]: http://msdn.microsoft.com/en-us/library/system.reflection.assemblyname.aspx
   [2]: DependencyResolver.Test
   [3]: DependencyResolver/App.config.sample
