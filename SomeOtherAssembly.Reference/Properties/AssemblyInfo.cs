@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Fugro")]
 [assembly: AssemblyProduct("SomeOtherAssembly.Reference")]
-[assembly: AssemblyCopyright("Copyright © Fugro 2013")]
+[assembly: AssemblyCopyright("Copyright © Maarten Abbink 2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
