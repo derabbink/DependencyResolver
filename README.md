@@ -10,6 +10,9 @@ Assemblies in the global assembly cache (GAC) are omitted from the result list.
 
 See the [DependencyResolver.Test][2] project for some code samples.
 
+Don't forget to edit your config file like [so][3].
+
 
   [1]: http://msdn.microsoft.com/en-us/library/system.reflection.assemblyname.aspx
   [2]: DependencyResolver.Test
+  [3]: DependencyResolver/App.config.sample
