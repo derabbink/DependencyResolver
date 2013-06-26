@@ -1,0 +1,1 @@
+nuget pack DependencyResolver.csproj -Prop Configuration=Release
