@@ -2,6 +2,6 @@
 <configuration>
   <appSettings>
     <!-- path to look for assemblies (relative to ApplicationBasePath). Separate directories with ; -->
-    <add key="AssemblyLoader.assembly-path" value="..\..\..\SomeOtherAssembly\bin\Debug"/>
+    <add key="DependencyResolver.assembly-path" value="..\..\..\SomeOtherAssembly\bin\Debug"/>
   </appSettings>
 </configuration>

@@ -54,9 +54,12 @@ namespace DependencyResolver.Util
             foreach (string p in paths)
             {
                 DirectoryInfo dir = new DirectoryInfo(p);
-                IEnumerable<FileInfo> files = dir.GetFiles("*.dll");
+                IEnumerable<FileInfo> files = dir.EnumerateFiles();
                 foreach (FileInfo f in files)
                 {
+                    if (!AssemblyExtensions.Contains(f.Extension))
+                        continue;
+
                     AssemblyName name = AssemblyName.GetAssemblyName(f.FullName);
                     if (name.FullName == assembly.FullName || name.Name == assembly.Name)
                         return AssemblyMetaData.CreateFromAssembly(Assembly.ReflectionOnlyLoadFrom(f.FullName));
