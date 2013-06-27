@@ -15,14 +15,29 @@ namespace DependencyResolver.Util
     /// </summary>
     internal class AssemblyLoader : MarshalByRefObject
     {
-        private readonly string _assemblyPath;
+        private IList<string> _assemblyPaths;
 
         /// <summary>
         /// constructur is public for reflection
         /// </summary>
         public AssemblyLoader()
         {
-            _assemblyPath = ConfigurationManager.AppSettings.Get("DependencyResolver.assembly-path");
+            LoadAssemblyPaths();
+        }
+
+        private void LoadAssemblyPaths()
+        {
+            _assemblyPaths = new List<string>();
+            string paths = ConfigurationManager.AppSettings.Get("DependencyResolver.assembly-path");
+            if (!string.IsNullOrEmpty(paths))
+            {
+                IEnumerable<string> dirs = paths.Split(Path.PathSeparator).Where(s => !string.IsNullOrEmpty(s));
+                foreach (string dir in dirs)
+                {
+                    if (Directory.Exists(dir))
+                        _assemblyPaths.Add(dir);
+                }
+            }
         }
 
         internal static AssemblyLoader CreateInstanceInAppDomain(AppDomain domain)
@@ -50,19 +65,15 @@ namespace DependencyResolver.Util
 
         private AssemblyMetaData ReflectionOnlyLoadFromAssemblyPath(AssemblyName assembly, FileNotFoundException originalException)
         {
-            IEnumerable<string> paths = _assemblyPath.Split(Path.PathSeparator);
-            foreach (string p in paths)
+            foreach (string dir in _assemblyPaths)
             {
-                DirectoryInfo dir = new DirectoryInfo(p);
-                IEnumerable<FileInfo> files = dir.EnumerateFiles();
-                foreach (FileInfo f in files)
+                DirectoryInfo di = new DirectoryInfo(dir);
+                IEnumerable<FileInfo> files = di.EnumerateFiles().Where(fi => AssemblyExtensions.Contains(fi.Extension));
+                foreach (FileInfo fi in files)
                 {
-                    if (!AssemblyExtensions.Contains(f.Extension))
-                        continue;
-
-                    AssemblyName name = AssemblyName.GetAssemblyName(f.FullName);
+                    AssemblyName name = AssemblyName.GetAssemblyName(fi.FullName);
                     if (name.FullName == assembly.FullName || name.Name == assembly.Name)
-                        return AssemblyMetaData.CreateFromAssembly(Assembly.ReflectionOnlyLoadFrom(f.FullName));
+                        return AssemblyMetaData.CreateFromAssembly(Assembly.ReflectionOnlyLoadFrom(fi.FullName));
                 }
             }
 

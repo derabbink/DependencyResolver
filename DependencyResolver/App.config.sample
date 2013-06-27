@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <configuration>
   <appSettings>
-    <!-- path to look for assemblies (relative to ApplicationBasePath). Separate directories with ; -->
-    <add key="DependencyResolver.assembly-path" value="..\..\..\SomeOtherAssembly\bin\Debug"/>
+    <!-- path to look for assemblies (relative to ApplicationBasePath, which is bin\Debug or bin\Release). Separate directories with ; -->
+    <add key="DependencyResolver.assembly-path" value="..\..\..\DependencyResolver\bin\Debug;..\..\..\SomeOtherAssembly.Reference\bin\Debug;..\..\..\SomeOtherAssembly\bin\Debug"/>
   </appSettings>
 </configuration>
