@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("DependencyResolver")]
-[assembly: AssemblyDescription("Tool for computing list reference assemblies in loading order")]
+[assembly: AssemblyDescription("Tool for computing a list of reference assemblies in loading order")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Fugro")]
 [assembly: AssemblyProduct("DependencyResolver")]
