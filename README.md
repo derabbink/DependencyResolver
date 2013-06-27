@@ -20,8 +20,8 @@ Get the compiled library [here][4].
 
 ## Version
 
-The current stable/published version is v1.0.0.1.<br/>
-The current development version is now v1.0.0.2.
+The current stable/published version is v1.0.0.2.<br/>
+The current development version is now v1.0.0.3.
 
 
   [1]: http://msdn.microsoft.com/en-us/library/system.reflection.assemblyname.aspx
