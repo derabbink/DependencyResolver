@@ -4,9 +4,9 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
-namespace DependencyResolver.Data
+namespace DependencyResolver.AppDomainHelper.Data
 {
-    internal class AssemblyNameEqualityComparer : IEqualityComparer<AssemblyName>
+    public class AssemblyNameEqualityComparer : IEqualityComparer<AssemblyName>
     {
         public bool Equals(AssemblyName x, AssemblyName y)
         {

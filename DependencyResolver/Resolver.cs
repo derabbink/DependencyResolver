@@ -4,8 +4,8 @@ using System.Linq;
 using System.Reactive.Linq;
 using System.Reflection;
 using System.Text;
-using DependencyResolver.Data;
-using DependencyResolver.Util;
+using DependencyResolver.AppDomainHelper.Data;
+using DependencyResolver.AppDomainHelper.Util;
 
 namespace DependencyResolver
 {
@@ -20,7 +20,7 @@ namespace DependencyResolver
         /// <returns></returns>
         public static IObservable<AssemblyName> GetAllDependencies(AssemblyName start)
         {
-            AppDomain tempDomain = AppDomainHelper.CreateTempDomain();
+            AppDomain tempDomain = AppDomainHelper.Util.AppDomainHelper.CreateTempDomain();
             AssemblyLoader loader = AssemblyLoader.CreateInstanceInAppDomain(tempDomain);
 
             ISet<AssemblyName> assemblies = new HashSet<AssemblyName>(new AssemblyNameEqualityComparer());

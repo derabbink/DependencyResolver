@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace DependencyResolver.Util
+namespace DependencyResolver.AppDomainHelper.Util
 {
     internal static class AssemblyExtensions
     {

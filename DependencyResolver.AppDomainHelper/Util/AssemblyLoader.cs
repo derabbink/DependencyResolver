@@ -5,15 +5,15 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using DependencyResolver.Data;
+using DependencyResolver.AppDomainHelper.Data;
 
-namespace DependencyResolver.Util
+namespace DependencyResolver.AppDomainHelper.Util
 {
     /// <summary>
     /// Wrapper class for assembly loading instructions
     /// extends MarshalByRefObject to invoke methods in other AppDomain
     /// </summary>
-    internal class AssemblyLoader : MarshalByRefObject
+    public class AssemblyLoader : MarshalByRefObject
     {
         private IList<string> _assemblyPaths;
 
@@ -40,7 +40,7 @@ namespace DependencyResolver.Util
             }
         }
 
-        internal static AssemblyLoader CreateInstanceInAppDomain(AppDomain domain)
+        public static AssemblyLoader CreateInstanceInAppDomain(AppDomain domain)
         {
             AssemblyName ownAssyName = AssemblyHelper.GetOwnAssemblyName();
             Assembly assy = domain.Load(ownAssyName);
@@ -49,7 +49,7 @@ namespace DependencyResolver.Util
             return domain.CreateInstanceAndUnwrap(assyName.Name, typename) as AssemblyLoader;
         }
 
-        internal AssemblyMetaData ReflectionOnlyLoad(AssemblyName assembly)
+        public AssemblyMetaData ReflectionOnlyLoad(AssemblyName assembly)
         {
             try
             {
@@ -95,7 +95,7 @@ namespace DependencyResolver.Util
                         if (name.FullName == assembly.FullName || name.Name == assembly.Name)
                             return AssemblyMetaData.CreateFromAssembly(Assembly.ReflectionOnlyLoadFrom(fi.FullName));
                     }
-                    catch (BadImageFormatException ex)
+                    catch (BadImageFormatException)
                     {
                         //this happens if the assembly does not have a manifest.
                         //We'll assume it's the file we're looking for.

@@ -5,14 +5,14 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
-namespace DependencyResolver.Data
+namespace DependencyResolver.AppDomainHelper.Data
 {
     /// <summary>
     /// Data class containing an Assembly object's meta data.
     /// Immutable
     /// </summary>
     [Serializable]
-    internal class AssemblyMetaData
+    public class AssemblyMetaData
     {
         private AssemblyMetaData() {}
 
@@ -48,12 +48,12 @@ namespace DependencyResolver.Data
             return result;
         }
 
-        internal AssemblyName Name { get; private set; }
+        public AssemblyName Name { get; private set; }
 
         internal string CodeBase { get; private set; }
 
-        internal IEnumerable<AssemblyName> ReferencedAssemblies { get; private set; }
+        public IEnumerable<AssemblyName> ReferencedAssemblies { get; private set; }
 
-        internal bool GlobalAssemblyCache { get; private set; }
+        public bool GlobalAssemblyCache { get; private set; }
     }
 }

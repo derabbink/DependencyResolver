@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SomeOtherAssembly", "SomeOt
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SomeOtherAssembly.Reference", "SomeOtherAssembly.Reference\SomeOtherAssembly.Reference.csproj", "{AC1955AE-72F2-46BA-A561-4FE1560BE376}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DependencyResolver.AppDomainHelper", "DependencyResolver.AppDomainHelper\DependencyResolver.AppDomainHelper.csproj", "{38D686A8-AA7D-4CCE-8DB7-F449CEC0757D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{AC1955AE-72F2-46BA-A561-4FE1560BE376}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC1955AE-72F2-46BA-A561-4FE1560BE376}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC1955AE-72F2-46BA-A561-4FE1560BE376}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38D686A8-AA7D-4CCE-8DB7-F449CEC0757D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38D686A8-AA7D-4CCE-8DB7-F449CEC0757D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38D686A8-AA7D-4CCE-8DB7-F449CEC0757D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38D686A8-AA7D-4CCE-8DB7-F449CEC0757D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

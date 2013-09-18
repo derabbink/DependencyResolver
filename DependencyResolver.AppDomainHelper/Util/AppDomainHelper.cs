@@ -5,11 +5,11 @@ using System.Reflection;
 using System.Security.Policy;
 using System.Text;
 
-namespace DependencyResolver.Util
+namespace DependencyResolver.AppDomainHelper.Util
 {
-    internal static class AppDomainHelper
+    public static class AppDomainHelper
     {
-        internal static AppDomain CreateTempDomain()
+        public static AppDomain CreateTempDomain()
         {
             string name = GenerateDomainName();
             //need to reuse config, in order to get access to THIS assembly and dependencies
