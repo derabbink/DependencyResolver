@@ -53,7 +53,12 @@ namespace DependencyResolver.Util
         {
             try
             {
-                return AssemblyMetaData.CreateFromAssembly(Assembly.ReflectionOnlyLoad(assembly.FullName));
+                AssemblyMetaData result = AssemblyMetaData.CreateFromAssembly(Assembly.ReflectionOnlyLoad(assembly.FullName));
+
+                if (AssemblyIsInBasePath(result))
+                    throw new FileNotFoundException("Not loading anything from implicit assembly path.");
+                else
+                    return result;
             }
             catch (FileNotFoundException ex)
             {
@@ -61,6 +66,19 @@ namespace DependencyResolver.Util
                 //if ReflectionOnlyLoad fails, so this is a custom implementation for that
                 return ReflectionOnlyLoadFromAssemblyPath(assembly, ex);
             }
+        }
+
+        private bool AssemblyIsInBasePath(AssemblyMetaData assembly)
+        {
+            string basedir = Path.GetFullPath(AppDomain.CurrentDomain.BaseDirectory);
+            string compareDir = Path.GetFullPath((new Uri(assembly.CodeBase)).LocalPath);
+            while (!string.IsNullOrEmpty(compareDir))
+            {
+                if (compareDir == basedir)
+                    return true;
+                compareDir = Path.GetDirectoryName(compareDir);
+            }
+            return false;
         }
 
         private AssemblyMetaData ReflectionOnlyLoadFromAssemblyPath(AssemblyName assembly, FileNotFoundException originalException)
@@ -71,9 +89,19 @@ namespace DependencyResolver.Util
                 IEnumerable<FileInfo> files = di.EnumerateFiles().Where(fi => AssemblyExtensions.Contains(fi.Extension));
                 foreach (FileInfo fi in files)
                 {
-                    AssemblyName name = AssemblyName.GetAssemblyName(fi.FullName);
-                    if (name.FullName == assembly.FullName || name.Name == assembly.Name)
-                        return AssemblyMetaData.CreateFromAssembly(Assembly.ReflectionOnlyLoadFrom(fi.FullName));
+                    try
+                    {
+                        AssemblyName name = AssemblyName.GetAssemblyName(fi.FullName);
+                        if (name.FullName == assembly.FullName || name.Name == assembly.Name)
+                            return AssemblyMetaData.CreateFromAssembly(Assembly.ReflectionOnlyLoadFrom(fi.FullName));
+                    }
+                    catch (BadImageFormatException ex)
+                    {
+                        //this happens if the assembly does not have a manifest.
+                        //We'll assume it's the file we're looking for.
+                        if (assembly.Name == Path.GetFileNameWithoutExtension(fi.Name))
+                            return AssemblyMetaData.CreateFromPath(assembly.Name, fi.FullName);
+                    }
                 }
             }
 
