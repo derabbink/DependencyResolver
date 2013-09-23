@@ -53,17 +53,22 @@ namespace DependencyResolver.AppDomainHelper.Util
         {
             try
             {
-                AssemblyMetaData result = AssemblyMetaData.CreateFromAssembly(Assembly.ReflectionOnlyLoad(assembly.FullName));
+                AssemblyMetaData result =
+                    AssemblyMetaData.CreateFromAssembly(Assembly.ReflectionOnlyLoad(assembly.FullName));
 
                 if (AssemblyIsInBasePath(result))
                     throw new FileNotFoundException("Not loading anything from implicit assembly path.");
                 else
                     return result;
             }
-            catch (FileNotFoundException ex)
-            {
                 //there is no AssemblyResolve or ReflectionOnlyAssemblyResolve event fired
                 //if ReflectionOnlyLoad fails, so this is a custom implementation for that
+            catch (FileNotFoundException ex)
+            {
+                return ReflectionOnlyLoadFromAssemblyPath(assembly, ex);
+            }
+            catch (FileLoadException ex)
+            {
                 return ReflectionOnlyLoadFromAssemblyPath(assembly, ex);
             }
         }
@@ -81,7 +86,7 @@ namespace DependencyResolver.AppDomainHelper.Util
             return false;
         }
 
-        private AssemblyMetaData ReflectionOnlyLoadFromAssemblyPath(AssemblyName assembly, FileNotFoundException originalException)
+        private AssemblyMetaData ReflectionOnlyLoadFromAssemblyPath(AssemblyName assembly, IOException originalException)
         {
             foreach (string dir in _assemblyPaths)
             {
