@@ -36,6 +36,7 @@ namespace DependencyResolver.Test
             List<string> expectedNames = new List<string>()
                 {
                     "nunit.framework",
+                    "DependencyResolver.AppDomainHelper",
                     "System.Reactive.Interfaces",
                     "System.Reactive.Linq",
                     "DependencyResolver",
